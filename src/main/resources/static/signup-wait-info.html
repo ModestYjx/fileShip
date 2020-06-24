@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+
+    <title>首页</title>
+    <!-- 1.9.1的JQuery文件 -->
+    <script src="common-js/jquery1.9.1.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+	<link rel="stylesheet" href="common-css/bootstrap3.css">
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+	<script src="common-js/bootstrap3.js"></script>
+    <style>
+		#wrapper{
+    		margin: 200px;;
+    		margin-left: 200px;
+    	}
+    </style>
+	</head>
+	<body>
+		<div class="container-fluid text-center" id="wrapper">
+			<div class="jumbotron">
+				<h1 style="color: rgb(84, 120, 240);">FileShip邮件--<b>测试期间免去激活</b></h1>
+	  			<br>
+	  			<p>尊敬的用户:</p>
+	  			<br>
+	  			<p>您好，感谢您注册FileShip！我们已发送一封激活邮件到您的注册邮箱!</p>
+	  			<br>
+	  			<p>如您未做出操作，可能是他人误填，请忽略此邮件。</p>
+	  			<br>
+	  			<p>本邮件为系统发送，请勿回复。</p>
+	  			<p><a class="btn btn-primary btn-lg" href="https://www.baidu.com/" role="button">登录邮箱</a></p>
+			</div>
+		</div>
+
+		<script>
+			var href = window.location.href;
+			console.log(href);
+			if(href.indexOf("qq.com")!=-1){
+				$(".btn").attr("href","https://mail.qq.com/");
+			}else if (href.indexOf("163.com")!=-1) {
+				$(".btn").attr("href","https://mail.163.com/");
+				console.log(163)
+			}else if (href.indexOf("126.com")!=-1) {
+				$(".btn").attr("href","https://mail.126.com/");
+			}else if (href.indexOf("sina.com")!=-1) {
+				$(".btn").attr("href","https://mail.sina.com.cn/");
+			}else if (href.indexOf("aliyun.com")!=-1) {
+				$(".btn").attr("href","https://mail.aliyun.com/");
+			}else {
+				$(".btn").attr("href","https://www.baidu.com/");
+			}
+		</script>
+	
+
+</body></html>

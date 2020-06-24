@@ -1,0 +1,24 @@
+# 开发环境的配置
+spring:
+  datasource:
+    # MySQL
+    username: root
+    password: yang929604665
+    url: jdbc:mysql://localhost:3306/fileship?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  devtools:
+    restart:
+      enabled: true
+
+  jpa:
+    show-sql: true
+
+
+server:
+  port: 80
+  servlet:
+    context-path: /
+  tomcat:
+      # tomcat吞吐量不做限制，这样就能捕获到文件大小超限的异常 参考链接：https://weiku.co/article/198/
+      max-swallow-size: 1000MB

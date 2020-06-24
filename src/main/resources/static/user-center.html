@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1">
+    <link rel="stylesheet" href="common-css/bootstrap3.css">
+    <link rel="stylesheet" href="css/user-center.css">
+    <link rel="stylesheet" href="common-css/jquery.sidr.light.css">
+    <!--Messenger Alert-->
+    <link rel="stylesheet" href="common-css/messenger/messenger.css">
+    <link rel="stylesheet" href="common-css/messenger/messenger-theme-air.css">
+    <!--1.9.1 JQuery-->
+    <script src="common-js/jquery1.9.1.js"></script>
+    <!--bootstrap3 js dependency-->
+    <script src="common-js/bootstrap3.js"></script>
+    <!--sidr 侧拉栏组件-->
+    <script src="common-js/jquery.sidr.js"></script>
+    <!--手势操作依赖库-->
+    <script src="common-js/jquery.touchSwipe.min.js"></script>
+    <!--Vue 开发版-->
+    <script src="common-js/vue.js"></script>
+    <!--Messenger Alert-->
+    <script src="common-js/messenger/messenger.min.js"></script>
+    <!--Clipboard 点击复制插件-->
+    <script src="common-js/clipboard.min.js"></script>
+    <!--全局配置文件-->
+    <script src="common-js/fo.js"></script>
+</head>
+<body>
+<header>
+    <!---->
+    <!--导航栏-->
+    <!---->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <!--响应式的导航栏按钮-->
+                <!--<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">-->
+                <!--<span class="icon-bar"></span>-->
+                <!--<span class="icon-bar"></span>-->
+                <!--<span class="icon-bar"></span>-->
+                <!--</button>-->
+                <a class="navbar-brand" href="intro.html">
+                    <img src="common-img/shipLogo.png" alt="Brand">
+                </a>
+                <div class="visible-xs-block" id="nav-right-part">
+                    <span class="glyphicon glyphicon-bell navbar-text"></span>
+                    <a href="#" class="navbar-brand">
+                        <img src="img/user-center/user-logo.jpg" alt="" class="img-circle">
+                    </a>
+                </div>
+            </div>
+
+            <!--被响应式导航栏按钮隐藏的内容-->
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <!--<div class="collapse navbar-collapse" id="nav-collapse">-->
+            <!--<ul class="nav navbar-nav">-->
+            <!--<li><a href="#">上传</a></li>-->
+            <!--<li ><a href="#" >下载</a></li>-->
+            <!--</ul>-->
+            <!--<ul class="nav navbar-nav navbar-right">-->
+            <!--<li><a href="#">登录</a></li>-->
+            <!--<li class="dropdown">-->
+            <!--<a href="#">注册</a>-->
+            <!--</li>-->
+            <!--</ul>-->
+            <!--</div>&lt;!&ndash; /.navbar-collapse &ndash;&gt;-->
+            <div class="navbar-right hidden-xs">
+                <span class="glyphicon glyphicon-bell navbar-text"></span>
+                <a href="user-setting.html"><span class="glyphicon glyphicon-cog navbar-text "></span></a>
+                <a href="#" class="navbar-brand">
+                    <img src="img/user-center/user-logo.jpg" alt="" class="img-circle">
+                </a>
+
+            </div>
+            <form class="navbar-form navbar-right hidden-xs">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="文件码" id="searchFolderIndex">
+                </div>
+                <button type="button" class="btn btn-default" id="searchFolderBTN">搜索</button>
+            </form>
+        </div><!-- /.container-fluid -->
+    </nav>
+</header>
+
+<main>
+    <!---->
+    <!--侧拉栏-->
+    <!---->
+    <div class="sider-bar">
+        <a href="#sider-content" id="sider-menu"><span class=""></span></a>
+        <div id="sider-content">
+            <div class="profile-head">
+                <img src="profile-img/user-logo.jpg" alt="" class="img-circle center-block">
+            </div>
+            <ul>
+                <li class="text-center">{{user.nickname}}</li>
+                <li class="text-center">绑定: <span class=bundled-email">{{user.email}}</span></li>
+                <li class="text-center">绑定手机号: <span class="bundled-phone">{{user.phoneNumber}}</span></li>
+                <li class="text-center"><button class="btn btn-primary" data-toggle="modal" data-target=".multi-person-task-create-modal">创建文件仓库</button></li>
+                <li class="text-center"><a href="index.html"><button class="btn btn-primary">上传文件</button></a></li>
+                <li class="text-center"><a href="index.html"><button class="btn btn-primary">下载文件</button></a></li>
+                <li class="text-center fo-repository-info">
+                    当前面板中文件数: <span>{{files.length}}</span>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" :style="{width:(files.length)*10+'%'}" style="width: 30%">
+                            <!--<span class="sr-only">40% Complete (success)</span>-->
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <img src="img/user-center/trashCan_empty.png" alt="" id="emptyTrashCan" hidden>
+                    <img src="img/user-center/trashCan_full.png" alt="" id="fullTrashCan" hidden>
+                </li>
+            </ul>
+        </div><!--/#sider-content-->
+    </div>
+
+    <!--文件仓库列表-->
+    <div class="fo-folder-list container-fluid" id="warehouse-list">
+        <div class="row">
+            <div class="col-lg-1 col-xs-3" v-if="warehouseStack.length>1" @click="closeWarehouse">
+                <!--<div>-->
+                <!--<span class="glyphicon glyphicon-arrow-left"></span>-->
+                <!--</div>-->
+                <a href="#"><img src="img/user-center/left-arrow.png" class="img-responsive" alt=""></a>
+            </div>
+            <div class="col-lg-1 col-xs-3 fo-file-folder" v-for="w in warehouses" @click="openWarehouse">
+                <div class="fo-folder" draggable="true" :data-warehouseid="w.warehouseId" :data-type="w.type" @click.right="openFolderContextMenu">
+                    <img src="img/user-center/folder-group.png" alt="" class="img-responsive"  >
+                    <p class="text-center">{{w.createdDate.slice(0,10)}}</p>
+                    <p class="text-center fo-item-name">{{w.name}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--文件列表-->
+    <div class="fo-file-list container-fluid" id="file-list">
+        <div class="row">
+
+            <div class="col-lg-1 col-xs-3"  v-for="f in files">
+                <div class="fo-file" draggable="true" :data-fileid="f.fileId" :data-filetype="f.type" @click.right="openFileContextMenu">
+                    <img src="img/user-center/file.jpg" alt="" class="img-responsive" :style="{opacity: f.status==0?1:0.15}" >
+                    <p class="text-center">{{f.createdDate.slice(0,10)}}</p>
+                    <p class="text-center fo-item-name">{{f.name}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<!-- 右键菜单-->
+<div class="panel panel-default fo-right-hand-panel" id="item-context-menu">
+        <ul class="list-group">
+            <li class="list-group-item fo-right-hand-list"  @click="showJoinOrMergeModal" v-if="currentSelectedItemType==TYPE_FILE">提交到文件仓库</li>
+            <li class="list-group-item fo-right-hand-list"  @click="showJoinOrMergeModal" v-if="currentSelectedItemType==TYPE_WAREHOUSE">合并到文件仓库</li>
+            <li class="list-group-item fo-right-hand-list" @click="download">下载</li>
+            <li class="list-group-item fo-right-hand-list" @click='showShareModal'> 分享 </li>
+            <li class="list-group-item fo-right-hand-list" v-if="currentSelectedItemType==TYPE_FILE" @click="showRenameModal">修改文件名</li>
+            <li class="list-group-item fo-right-hand-list" v-if="currentSelectedItemType==TYPE_FILE" @click="doClaimFile">认领</li>
+            <li class="list-group-item fo-right-hand-list" v-if="currentSelectedItemType==TYPE_WAREHOUSE" @click="showRenameModal">修改仓库名</li>
+            <li class="list-group-item fo-right-hand-list" v-if="currentSelectedItemType==TYPE_WAREHOUSE" @click="showCollationAndAnalysisModal">整理分析</li>
+            <li class="list-group-item fo-right-hand-list" @click="deleteItem">删除</li>
+        </ul>
+</div>
+
+<!--重命名模态框-->
+<button class="btn btn-primary" data-toggle="modal" data-target=".rename-modal" id="showRenameModalBTN" style="display: none;"></button>
+<div class="modal fade rename-modal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="rename-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" >重命名</h4>
+            </div>
+            <div class="modal-body">
+               <div class="form-group">
+                   <label for="rename-input" >新名字</label>
+                   <input type="text" id="rename-input" class="form-control">
+               </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="r" onclick="page.renameItem();">立即重命名！</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!--一键整理并分析-->
+<button class="btn btn-primary" data-toggle="modal" data-target=".collationAndAnalysis-modal" id="showCollationAndAnalysisModal" style="display: none;"></button>
+<div class="modal fade collationAndAnalysis-modal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="collationAndAnalysis-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" >整理并分析</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label >选择对照的名单</label>
+                    <select class="form-control" @blur="fetchHeader" >
+                        <option v-for="n in nameLists" :value="n.id" >{{n.name}}</option>
+                    </select>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <h5>方式一：判断规则为 文件名含有名单中匹配列的列值</h5>
+                    <label >选择匹配列</label>
+                    <select class="form-control" >
+                        <option v-for="n in nameListHeader">{{n}}</option>
+                    </select>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <h5>方式二：判断规则为 名单的邮箱列与上传者邮箱一致</h5>
+                    <label >选择邮箱列（如果你需要稍后通知未交者，也需要填选此项）</label>
+                    <select class="form-control" >
+                        <option v-for="n in nameListHeader">{{n}}</option>
+                    </select>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <label for="template-input">命名模板</label>
+                    <input type="text" class="form-control" placeholder="必须是表中的列名，如：班级-姓名-学号" id="template-input">
+                </div>
+                <hr>
+                <button class="btn btn-success" @click="method1">方式一</button>
+                <button class="btn btn-info">方式二</button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <!--<button type="button" class="btn btn-primary"  onclick="page.renameItem();">立即重命名！</button>-->
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!--创建多人仓库模态框-->
+<div class="modal fade multi-person-task-create-modal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">在当前位置创建文件仓库</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label><b>为文件仓库命名</b></label>
+                    <input type="text" class="form-control" name="warehouse-name">
+                </div>
+                <div class="form-group">
+                    <label><b>为仓库中的文件设置命名约束</b></label>
+                    <input type="text" class="form-control" name="constraint">
+                </div>
+                <hr>
+                <div class="fo-file-time-select" id="file-time-select">
+                    <label >仓库有效期：</label>
+                    <label class="file-time-select-label"><input name="file-time-select" type="radio" value="1">一天</label>
+                    <label class="file-time-select-label"><input name="file-time-select" type="radio" value="3">三天</label>
+                    <label class="file-time-select-label"><input name="file-time-select" type="radio" value="7">七天</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="page.createWarehouse()">立刻创建！</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<button class="btn btn-primary" data-toggle="modal" data-target=".joinOrMerge-modal" id="joinBTN" style="display: none;"></button>
+<!--提交合并到多人仓库模态框，具体模态框的样式由当前被操作的Item的类型决定-->
+<div class="modal fade joinOrMerge-modal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="joinOrMerge-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" v-if="currentSelectedItemType==TYPE_FILE">提交到文件仓库</h4>
+                <h4 class="modal-title" v-if="currentSelectedItemType==TYPE_WAREHOUSE">合并到文件仓库</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>文件仓库的文件码</label></b></label>
+                    <input type="text" class="form-control"
+                           placeholder="该文件码由文件仓库持有者提供" name="warehouseToken">
+                </div>
+
+                <div class="form-group" v-if="currentSelectedItemType==TYPE_FILE">
+                    <label>文件重命名（可选）</label></b></label>
+                    <input type="text" class="form-control"
+                           placeholder="如果你需要的话，可以在这里为你的文件重命名（不包括后缀名）" name="newFileName">
+                </div>
+                <hr>
+                <!--<label for="warehouse-upload"></label>-->
+                <!--<input type="file" id="warehouse-upload">-->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" @click='joinOrMerge' v-if="currentSelectedItemType==TYPE_FILE">立即提交！</button>
+                <button type="button" class="btn btn-primary" @click='joinOrMerge' v-if="currentSelectedItemType==TYPE_WAREHOUSE">立即合并！</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!--分享模态框-->
+<button class="btn btn-primary" data-toggle="modal" data-target=".share-modal" id="shareBTN" style="display: none;"></button>
+<div class="modal fade share-modal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="share-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" >复制分享链接</h4>
+            </div>
+            <div class="modal-body">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-success">
+                        <button class="btn btn-success fo-copy-btn" :data-clipboard-text="share1">点击复制中文文件码的分享链接: </button>
+                        <span >{{share1}}</span>
+                    </li>
+                    <hr>
+
+                    <li class="list-group-item list-group-item-info">
+                        <button class="btn btn-info fo-copy-btn" :data-clipboard-text="share2">点击复制32位字母文件码的分享链接: </button>
+                        <span>{{share2}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<!--分析结果模态框-->
+<!-- Large modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" id="analyze-result-modal-btn" style="display: none;">Large modal</button>
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="analyze-result-modal">
+    <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" >整理分析结果(以下是未交名单)</h4>
+                </div>
+                <div class="modal-body table-responsive ">
+                    <table class="table table-bordered">
+                        <tr v-for="tr in notFoundList">
+                            <td v-for="td in tr">
+                                {{td}}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">一键邮件通知</button>
+                </div>
+            </div>
+    </div>
+</div>
+
+
+<!--vConsole控制台-->
+<!--<script src="common-js/vConsole.js"></script>-->
+<!--<script src="https://raw.githubusercontent.com/Tencent/vConsole/master/dist/vconsole.min.js"></script>-->
+</body>
+
+<script>
+    window.page = {
+        data:{ // 这里的data是reactive的
+            user:{
+                id:'',
+                email:'',
+                nickname:'',
+                phoneNumber:'',
+                rootWarehouseId:0,
+            },
+            files:[],
+            warehouses:[],
+            currentSelectedItemId:-1, //当前被选中的文件ID
+            currentSelectedItemType:0, //0:单人文件，1:多人文件/文件仓库
+            TYPE_FILE:0, // 文件
+            TYPE_WAREHOUSE:1, // 文件仓库
+            nameLists : [],
+            nameListHeader : [],
+            notFoundList : [],
+            warehouseStack:[], // 栈结构，记录文件仓库的打开顺序
+        },
+    };
+
+</script>
+
+<script src="js/user-center-2.js"></script>
+
+<script src="js/user-center.js"></script>
+
+
+</html>
+
+

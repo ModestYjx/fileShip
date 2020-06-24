@@ -1,0 +1,116 @@
+/*去掉body的横向滚动条*/
+body {
+    overflow-x: hidden;
+}
+
+/*responsive design*/
+@media screen and (max-width: 768px){
+    /*.folder{*/
+        /*font-size: 1px;*/
+    /*}*/
+    /*.file{*/
+        /*font-size: 1px;*/
+    /*}*/
+    body{
+        height: 100vh; /*为了使swipe组件更有效*/
+    }
+}
+
+@media (min-width: 992px){
+    .modal-lg {
+        width: 1540px !important;
+    }
+}
+/*-------------------------------------*/
+/*导航栏*/
+nav{
+    box-shadow: 3px 4px 12px 2px #e6e6e6;
+}
+/*导航栏logo*/
+.navbar-brand>img{
+    display: inline-block;
+    height: 100%;
+}
+.glyphicon-bell,.glyphicon-cog
+{
+    font-size:18px;
+}
+.glyphicon-cog{
+    margin-left: 8px;
+}
+/*用户头像*/
+.navbar-brand img[class="img-circle"]{
+    height: 140%;
+margin-top: -7px;
+}
+
+/*-------------------------------------*/
+/*侧拉栏*/
+/*只在超小屏上显示*/
+#nav-right-part{
+    float: right;
+}
+/*侧拉栏按钮*/
+.glyphicon-chevron-left{
+    font-size: 30px;
+}
+.glyphicon-chevron-right{
+    font-size: 30px;
+}
+#sider-content{
+    margin-top: 52px;
+}
+/*文件仓库使用情况-进度条*/
+.fo-repository-info span{
+    display: inline-block !important;
+}
+.fo-repository-info:hover span{
+    box-shadow: 0 0 0 0 !important;
+}
+.fo-fullTrashCanRemoved{
+    position: absolute;
+}
+/*#fullTrashCan:hover{*/
+/*position: absolute;*/
+/*left: 300px;*/
+/*}*/
+#fullTrashCan{
+    /*transition-timing-function: ease;*/
+    /*transition-property: all;*/
+    /*transition-duration: 2s;*/
+    /*transition-delay: 0.5s;*/
+}
+/*-------------------------------------*/
+/*folder-list*/
+.fo-file-list{
+    padding-left: 36px;
+}
+.fo-folder:hover{
+    cursor: pointer;
+    border: #ffca03 1px solid;
+}
+/*file-list*/
+.glyphicon-arrow-left{
+    font-size: 129px;
+}
+.fo-file:hover{
+    cursor: pointer;
+    border: #ffca03 1px solid;
+}
+
+.fo-right-hand-panel {
+    width: 150px;
+    position: fixed;
+    z-index: 100;
+    visibility: hidden;
+}
+.fo-right-hand-list {
+    cursor: pointer;
+}
+.fo-right-hand-list:hover {
+    background-color: #ffca03;
+}
+/*使得左侧栏能被模态框的背景覆盖*/
+.sidr{
+    z-index: 99 !important;
+}

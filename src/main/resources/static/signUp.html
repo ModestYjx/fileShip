@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="common-css/bootstrap3.css">
+    <link rel="stylesheet" href="css/signUp.css">
+    <script src="common-js/jquery1.9.1.js"></script>
+    <script src="common-js/bootstrap3.js"></script>
+    <!--Messenger Alert-->
+    <link rel="stylesheet" href="common-css/messenger/messenger.css">
+    <link rel="stylesheet" href="common-css/messenger/messenger-theme-air.css">
+    <!--Messenger Alert-->
+    <script src="common-js/messenger/messenger.min.js"></script>
+    <!--全局配置文件-->
+    <script src="common-js/fo.js"></script>
+</head>
+<body>
+<!---->
+<!--导航栏-->
+<!---->
+<nav class=
+             "navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="intro.html">
+                <img src="common-img/shipLogo.png" alt="Brand">
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="nav-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="index.html">上传</a></li>
+                <li ><a href="index.html" >下载</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="signIn.html">登录</a></li>
+                <li class="dropdown">
+                    <a href="signUp.html">注册</a>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<!---->
+<!--登录表单-->
+<!---->
+<div class="row">
+    <div class="col-lg-4 col-lg-offset-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <img src="common-img/shipLogo.png" class="center-block" alt="">
+                <br>
+                <h3 class="panel-title text-center">欢迎注册 &nbsp;FileShip &nbsp;!</h3>
+            </div>
+            <div class="panel-body">
+                <form action="user/doSignUp" method="post">
+                    <div class="form-group">
+                        <label for="email">登录邮箱</label>
+                        <input name="email" type="text" class="form-control" placeholder="邮箱" id="email" required autofocus title="请输入正确邮箱号">
+                    </div>
+                    <div class="form-group">
+                        <label for="nickname">昵称</label>
+                        <input name="nickname" type="text" class="form-control" placeholder="4到14个字符" id="nickname">
+                    </div>
+                    <div class="form-group">
+                        <label for="password1">密码</label>
+                        <input name="password" type="password" class="form-control" placeholder="6到25位字母或数字或符号组成" id="password1" required
+                               title="6到25位字母或数字或符号（._*!?）组成">
+                    </div>
+                    <div class="form-group">
+                        <label for="passowrd2">确认密码</label>
+                        <input type="password" class="form-control" placeholder="再输入一次密码" id="passowrd2" required>
+                    </div>
+                    <div class="form-group">
+                    <label for="verificationCode">验证码</label>
+                    <div class="input-group">
+                        <label class="input-group-btn" id="yzmBTNWrapper">
+                            <button class="btn btn-default" type="button" id="yzmBTN">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </button>
+                        </label>
+                        <input name="verificationCode" type="text" class="form-control" placeholder="验证码" required id="verificationCode">
+                    </div>
+                </div>
+                    <button id="submitBTN" class="btn btn-primary form-control" type="button">注册</button>
+                </form>
+                <hr>
+                <p class="text-center">注册表示同意<a>FileShip的用户协议</a></p>
+            </div><!--/panel-body-->
+        </div>
+    </div><!--col-lg-4-->
+</div><!--/row-->
+
+<script src="js/signUp.js"></script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+.fo-part{
+    background-color: grey;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+/*第一个版块*/
+#part1{
+    background-image: url(../img/intro/intro-bg2.jpg);
+    background-size: 100% 100%;
+}
+/*第一个版块的遮罩*/
+#part1:after{
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color:#03a9f4c9;
+}
+#logo{
+    height: 300px;
+    width: 300px;
+    background-color: #fff;
+    opacity: 50%;
+    border-radius: 150px;
+    z-index: 2;
+    background-image: url(../common-img/shipLogo.png);
+    background-size: 100% 81%;
+    background-repeat: no-repeat;
+
+    box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+}
+/*File Ship*/
+#product-name{
+    font-family: "Kaushan Script", cursive;
+    z-index: 2;
+    color: white;
+    font-size: 5em;
+    transform: rotate(-8deg);
+}
+#product-intro{
+    z-index: 2;
+    color: wheat;
+    font-size: 2em;
+}
+/*字体*/
+/*!* latin-ext *!*/
+/*@font-face {*/
+    /*font-family: 'Kaushan Script';*/
+    /*font-style: normal;*/
+    /*font-weight: 400;*/
+    /*src: local('Kaushan Script'), local('KaushanScript-Regular'), url(https://fonts.gstatic.com/s/kaushanscript/v6/vm8vdRfvXFLG3OLnsO15WYS5DG72wNJHMw.woff2) format('woff2');*/
+    /*unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;*/
+/*}*/
+/* latin */
+@font-face {
+    font-family: 'Kaushan Script';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Kaushan Script'), local('KaushanScript-Regular'), url(https://fonts.gstatic.com/s/kaushanscript/v6/vm8vdRfvXFLG3OLnsO15WYS5DG74wNI.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/*第2个版块*/
+#part2{
+    background-color: #EEEEEE;
+}
+.fo-card-header{
+    bottom: 3vh;
+    width: 93%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.31), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+
+    height:7vh;
+    border-radius: 3px;
+    background: linear-gradient(60deg, #66bb6a, #388e3c);
+    margin-top: -30px;
+
+    font-size: 2em;
+    color: white;
+    line-height: 7vh;
+}
+.fo-card{
+    position: relative;
+    border-radius: 3px;
+    color: rgba(0,0,0, 0.87);
+    background: #fff;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    height: 500px;
+}
+
+#card2>.fo-card-header{
+    text-align: center;
+    background: linear-gradient(60deg, #ef5350, #d32f2f);
+}
+.fo-card-content>ul{
+    font-size: 1.6em;
+    font-family: "Microsoft YaHei","微软雅黑";
+    list-style: none;
+    text-align: left;
+    margin-left: 10%;
+    line-height: 50px;
+}
+#card1>.fo-card-content>ul li span {
+    color: white;
+    background: linear-gradient(60deg, #66bb6a, #388e3c) ;
+}
+#card2>.fo-card-content>ul li span {
+    color: white;
+    background: linear-gradient(60deg, #ef5350, #d32f2f);
+}
+
+/*第三个版块*/
+#part3{
+    background-image: url(../img/intro/city.jpg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+#comment-body{
+    border-radius: 3px;
+    color: rgba(0,0,0, 0.87);
+    background: #fff;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    height: 500px;
+
+    padding-top: 20px;
+
+    padding-left: 3.5vw;
+    padding-right: 3.5vw;
+}
+#comment-header{
+    color: white;
+    background: linear-gradient(60deg, #9252ef, #2a31d3);
+    position: relative;
+    box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.31), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+    height: 7vh;
+    bottom: -3vh;
+    border-radius: 8px 8px 0 0;
+
+    font-size: 2em;
+    text-align: center;
+    line-height: 7vh;
+}
+.fo-quotation-mark{
+    display: inline-block;
+    height: 110px;
+    width:110px;
+    background-image: url(../img/intro/syh.png);
+    background-size: 100% 100%;
+}
+#quotation-mark-2{
+    transform: rotateY(-180deg);
+}
+#comment-body p{
+    font-family: handWrite;
+    font-size: 3em;
+}
+/*落款*/
+#comment-body>footer{
+    float: right;
+}
+/*导入手写字体*/
+@font-face{font-family:handWrite; src:url(../fonts/xdxwz.ttf);}

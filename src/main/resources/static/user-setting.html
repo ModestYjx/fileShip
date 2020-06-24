@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>用户设置</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1">
+    <link rel="stylesheet" href="common-css/bootstrap3.css">
+    <link rel="stylesheet" href="css/user-setting.css">
+    <!--Messenger Alert-->
+    <link rel="stylesheet" href="common-css/messenger/messenger.css">
+    <!--全局配置文件-->
+    <script src="common-js/fo.js"></script>
+    <!--1.9.1 JQuery-->
+    <script src="common-js/jquery1.9.1.js"></script>
+    <!--bootstrap3 js dependency-->
+    <script src="common-js/bootstrap3.js"></script>
+    <!--Vue 开发版-->
+    <script src="common-js/vue.js"></script>
+    <!--Messenger Alert-->
+    <script src="common-js/messenger/messenger.min.js"></script>
+</head>
+<body>
+<header>
+<!---->
+<!--导航栏-->
+<!---->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="intro.html">
+                <img src="common-img/shipLogo.png" alt="Brand">
+            </a>
+            <div class="visible-xs-block" id="nav-right-part">
+                <span class="glyphicon glyphicon-bell navbar-text"></span>
+                <a href="#" class="navbar-brand">
+                    <img src="img/user-center/user-logo.jpg" alt="" class="img-circle">
+                </a>
+            </div>
+        </div>
+        <div class="navbar-right hidden-xs">
+            <span class="glyphicon glyphicon-bell navbar-text"></span>
+            <span class="glyphicon glyphicon-cog navbar-text "></span>
+            <a href="/user-center.html" class="navbar-brand">
+                <img src="img/user-center/user-logo.jpg" alt="" class="img-circle">
+            </a>
+
+        </div>
+    </div><!-- /.container-fluid -->
+</nav>
+</header>
+
+
+<main>
+    <div class="container">
+        <!---->
+        <!--个人资料-->
+        <!---->
+        <div class="panel panel-default" id="user-info-panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">个人资料</h3>
+            </div>
+            <div class="panel-body">
+                <div id="info-user-logo" class="info">
+                    <img src="img/user-center/user-logo.jpg" alt="" class="img-circle" id="user-logo">
+                    <h3><button class="btn btn-success">修改头像</button></h3>
+                </div>
+                <hr>
+                <div class="info">
+                    <h4>账户昵称</h4>
+                    <p>
+                        <span id="nickname">{{nickname}}</span>
+                        <span id="modify-nickname" class="pull-right"><a href="">修改</a></span>
+                    </p>
+                </div>
+                <hr>
+                <div class="info">
+                    <h4>绑定手机</h4>
+                    <p>
+                        <span id="phone">{{phoneNumber}}</span>
+                        <span id="modify-phone" class="pull-right"><a href="">修改</a></span>
+                    </p>
+                </div>
+                <hr>
+                <div class="info">
+                    <h4>登录密码</h4>
+                    <p>
+                        <span>&nbsp;</span>
+                        <span id="modify-password" class="pull-right"><a href="">修改</a></span>
+                    </p>
+                </div>
+                <hr>
+                <div class="info">
+                    <h4>绑定邮箱</h4>
+                    <p>
+                        <span id="email">{{email}}</span>
+                        <span id="modify-email" class="pull-right"><a href="">修改</a></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!---->
+        <!--名单管理-->
+        <!---->
+        <div class="panel panel-default" id="namelist-panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">名单管理</h3>
+            </div>
+            <div class="panel-body">
+                <p><button class="btn btn-success pull-right" type="button" @click="doUpload">上传新名单</button></p>
+                <input type="file" >
+                <br>
+
+                <div class="info" v-for="namelist in nameLists">
+                    <hr>
+                    <h4>{{namelist.name}}</h4>
+                    <p>
+                        <span id="nameList-createDate">{{namelist.createDate}}</span>
+                        <span id="nameList-delete" class="pull-right"><a href="">删除</a></span>
+                        <span id="nameList-download" class="pull-right"><a :href="download(namelist.id)">下载&nbsp; &nbsp; &nbsp;</a></span>
+                    </p>
+                </div>
+                <hr>
+            </div>
+        </div>
+    </div>
+
+</main>
+</body>
+<script>
+    window.page = {
+        data : {
+            user:{
+                id:'',
+                email:'',
+                nickname:'',
+                phoneNumber:'',
+            },
+            nameLists:[],
+        }
+    };
+
+</script>
+<script src="js/user-setting-2.js"></script>
+<script src="js/user-setting.js"></script>
+</html>

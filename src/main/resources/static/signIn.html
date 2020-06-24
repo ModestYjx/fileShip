@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="common-css/bootstrap3.css">
+    <link rel="stylesheet" href="css/signUp.css">
+    <link rel="stylesheet" href="common-css/messenger/messenger.css">
+    <link rel="stylesheet" href="common-css/messenger/messenger-theme-air.css">
+    <script src="common-js/jquery1.9.1.js"></script>
+    <script src="common-js/bootstrap3.js"></script>
+    <!--Vue 开发版-->
+    <script src="common-js/vue.js"></script>
+    <!--Messenger Alert-->
+    <script src="common-js/messenger/messenger.min.js"></script>
+    <!--全局配置文件-->
+    <script src="common-js/fo.js"></script>
+
+</head>
+<body>
+<!---->
+<!--导航栏-->
+<!---->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="intro.html">
+                <img src="common-img/shipLogo.png" alt="Brand">
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="nav-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="index.html">上传</a></li>
+                <li ><a href="index.html" >下载</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" id="nav-right">
+                <li><a href="signIn.html">登录</a></li>
+                <li class="dropdown">
+                    <a href="signUp.html">注册</a>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<!---->
+<!--登录表单-->
+<!---->
+<div class="row">
+    <div class="col-lg-4 col-lg-offset-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <img src="common-img/shipLogo.png" class="center-block" alt="">
+                <br>
+                <h3 class="panel-title text-center">欢迎登录 &nbsp;FileShip &nbsp;!</h3>
+            </div>
+            <div class="panel-body">
+                <form action="user/doSignIn" method="post">
+                    <div class="form-group">
+                        <label for="email">用户名</label>
+                        <input name="email" type="text" class="form-control" placeholder="邮箱" id="email" required
+                               autofocus pattern=".*@.*\..+" title="请输入正确邮箱号">
+                    </div>
+                    <div class="form-group">
+                        <label for="passowrd">密码</label>
+                        <input name="password" type="password" class="form-control" placeholder="6到25位字母或数字或符号组成"
+                               id="password1" required id="passowrd" pattern="[1-9A-Za-z._*!?]{6,16}"
+                               title="6到16位字母或数字或符号组成">
+                    </div>
+                    <div class="form-group">
+                        <label for="yzm">验证码</label>
+                        <div class="input-group">
+                            <label class="input-group-btn" id="yzmBTNWrapper">
+                                <button id="yzmBTN" class="btn btn-default" type="button">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                </button>
+                            </label>
+                            <input name="verificationCode" type="text" class="form-control" placeholder="验证码" required
+                                   id="yzm">
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="remembermeCheckBox"> 七天免登录
+                            </label>
+                        </div>
+                    </div>
+                    <button id="submitBTN" type="button" class="btn btn-primary form-control">登录</button>
+                </form>
+            </div><!--/panel-body-->
+        </div>
+    </div><!--col-lg-4-->
+</div><!--/row-->
+<script src="js/signIn.js"></script>
+</body>
+</html>

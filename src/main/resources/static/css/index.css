@@ -1,0 +1,136 @@
+body {
+    overflow-y: hidden;
+}
+
+/*responsive design*/
+@media screen and (max-width: 768px){
+    #redFlag{
+        left: 79% !important;
+    }
+}
+@media screen and (min-width: 1170px){
+    .fo-form{
+        width: 47% !important;
+    }
+}
+/*导航栏*/
+nav{
+    box-shadow: 3px 4px 12px 2px #e6e6e6;
+}
+.navbar{
+    margin-bottom: 0;
+}
+/*导航栏logo*/
+.navbar-brand>img{
+    position: relative;
+    display: inline-block;
+    height: 100%;
+}
+/*表单*/
+.fo-form{
+    min-height: 400px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    bottom: -15vh;
+
+    padding-top: 5vh;
+    padding-left: 7vw;
+    padding-right: 7vw;
+    padding-bottom: 5vh;
+}
+/*表单面板头*/
+.fo-form-header div{
+    display: inline-block;
+    font-size: 2em;
+}
+.fo-form-header-label:hover{
+    cursor: pointer;
+}
+/*上传表单*/
+/*下载表单*/
+#form-body-download{
+    display: none;
+}
+/*表单主体*/
+/*验证码图片*/
+#yzmBTNWrapper>button{
+    background-image: url(/common/VerificationCodeGenerator);
+}
+#verificationCode1{
+    width: 35%;
+}
+#yzmBTNWrapper2>button{
+    background-image: url(/common/VerificationCodeGenerator);
+}
+#verificationCode2{
+    width: 35%;
+}
+.fo-form{
+    transition-property: filter;
+    transition-duration: 0.6s;
+    transition-timing-function: ease-out;
+}
+/*表单背景*/
+.fo-cover{
+    background-image: url(../img/index/bg2.png);
+    background-size: 100% 100%;
+    position: absolute;
+    height: 95vh;
+    opacity: 1;
+    width: 100%;
+    filter: blur(7px);
+}
+/*添加文件按钮*/
+#file-label{
+    display: inline-block;
+    float: right;
+    font-size: 1.2em;
+    color: green;
+    position: relative;
+    bottom: 5vh;
+    cursor: pointer;
+}
+/*小红旗*/
+#redFlag{
+    position: absolute;
+    top: 34.1%;
+    left: 90%;
+    display: inline-block;
+    width: 15px;
+}
+#redFlag>svg{
+    display: none;
+    fill:red;
+}
+
+/*上传/下载的标题*/
+.fo-inactive{
+    color: #8080805e;
+}
+
+/* 手机号lable */
+.form-control-phone {
+    height: 4rem;
+    font-size: 2rem;
+}
+
+.fo-file-time-select {
+    margin-bottom: 1rem;
+    display: none;
+}
+.file-time-select-label {
+    width: 100px;
+    font-size: 1.7rem;
+}
+.form-control1 {
+    margin-top: 28px;
+}
+.right-hand-panel {
+    width: 150px;
+    position: fixed;
+    z-index: 100;
+    top: 200px;
+    left: 200px;
+}

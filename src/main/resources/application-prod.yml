@@ -1,0 +1,20 @@
+#生产环境的相关配置
+spring:
+  datasource:
+    # MySQL
+    username: root
+    password: yang929604665
+    url: jdbc:mysql://127.0.0.1:3306/fileship?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    show-sql: false
+
+
+server:
+  port: 443
+  ssl:
+    key-store: classpath:flyingocean.cn.jks
+    key-store-password: d9sytq0lz6m4851
+    keyStoreType: JKS
+    enabled: true

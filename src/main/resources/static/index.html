@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>上传/下载</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1">
+    <link rel="stylesheet" href="common-css/bootstrap3.css">
+    <link rel="stylesheet" href="css/index.css">
+    <!--Messenger Alert-->
+    <link rel="stylesheet" href="common-css/messenger/messenger-theme-air.css">
+    <link rel="stylesheet" href="common-css/messenger/messenger.css">
+    <!--1.9.1 JQuery-->
+    <script src="common-js/jquery1.9.1.js"></script>
+    <!--bootstrap3 js dependency-->
+    <script src="common-js/bootstrap3.js"></script>
+    <!--Messenger Alert-->
+    <script src="common-js/messenger/messenger.min.js"></script>
+    <!--Cookies JS-->
+    <script src="common-js/cookies.js"></script>
+    <!--Vue 开发版-->
+    <script src="common-js/vue.js"></script>
+    <!--Clipboard 点击复制插件-->
+    <script src="common-js/clipboard.min.js"></script>
+    <!--全局配置文件-->
+    <script src="common-js/fo.js"></script>
+</head>
+
+<body>
+<header>
+    <!---->
+    <!--导航栏-->
+    <!---->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="intro.html">
+                    <img src="common-img/shipLogo.png" alt="Brand" id="ship">
+                </a>
+            </div>
+
+                <li id="redFlag">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve">
+                        <metadata> Svg Vector Icons : http://www.sfont.cn </metadata>
+                        <g><path d="M179,908.7c0,44.7-28.4,81.3-63.2,81.3c-34.7,0-63.2-36.6-63.2-81.3V91.3c0-44.7,28.4-81.3,63.2-81.3c34.7,0,63.2,36.6,63.2,81.3V908.7z"/><path d="M891.5,439.7C838.3,450,628.1,523.4,591.2,515c-36.9-8.4,6.7-73.7-89.8-73.7c-125,0-242.1,42.4-242.1,42.4s-44.9,24.8-44.9-42.4s0-221.6,0-284.8c0-63.1,56.6-88.1,56.6-88.1s85.4-43.9,231-43.9c92.9,0.4,45.9,61.3,89.3,71.5c43.3,10.2,274.3-59,274.3-59c68.1-12.5,81.8-1.8,81.8,75c0,0,0,220.9,0,249.6C947.3,390.4,944.6,429.5,891.5,439.7z"/></g>
+                        </svg>
+            </li>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="nav-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#" >上传</a></li>
+                    <li><a href="#" >下载</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right" id="nav-right">
+                    <li><a href="user-center.html" v-if="isRememberMe"><span class="glyphicon glyphicon-user"></span></a></li>
+                    <li><a href="signIn.html">登录</a></li>
+                    <li class="dropdown">
+                        <a href="signUp.html">注册</a>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</header>
+
+<main>
+    <!--背景-->
+    <div class="fo-cover"></div>
+
+    <div class="fo-form container">
+        <div class="fo-form-header text-center">
+            <div id="form-header-left" class="fo-form-header-label">上传</div>
+            <div id="form-header-middle">/</div>
+            <div id="form-header-right" class="fo-form-header-label  fo-inactive">下载</div>
+        </div>
+        <!--文件上传表单-->
+        <div class="fo-form-body" id="form-body-upload">
+            <form  id="file-upload-form" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="input1">邮箱</label>
+                    <input type="text" :value="user.email" id="input1" class="form-control form-control-phone" required autofocus>
+                </div>
+                <div class="form-group">
+                    <label for="verificationCode1">验证码</label>
+                    <div class="input-group">
+                        <label class="input-group-btn" id="yzmBTNWrapper">
+                            <button class="btn btn-default" type="button" onclick="page.changeVerificationCode(this)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </button>
+                        </label>
+                        <input type="text" class="form-control" placeholder="验证码" required id="verificationCode1">
+                    </div>
+                </div>
+                <label id="file-label">选择文件 <span class="glyphicon glyphicon-folder-open"></span></label>
+
+                <!-- <div class="fo-file-progress" id="file-progress-1">
+                    <p><span>1. </span>test.txt</p>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 60%;">
+                            60%
+                        </div>
+                    </div>
+                </div> -->
+
+                <div class="fo-file-time-select" id="file-time-select">
+                    <label class="file-time-select-label"><input name="file-time-select" type="radio" value="1" checked>一天</label>
+                    <label class="file-time-select-label"><input name="file-time-select" type="radio" value="3">三天</label>
+                    <label class="file-time-select-label"><input name="file-time-select" type="radio" value="7">七天</label>
+                </div>
+
+                <button class="btn btn-success form-control" id="upLoadBTN" type="button">上传文件</button>
+            </form>
+        </div>
+
+        <!--文件下载表单-->
+        <div class="fo-form-body" id="form-body-download">
+            <form action="#" id="file-download-form" >
+                <div class="form-group">
+                    <label for="input2">文件码</label>
+                    <input type="text" id="input2" class="form-control" required autofocus>
+                </div>
+                <div class="form-group">
+                    <label for="verificationCode2">验证码</label>
+                    <div class="input-group">
+                        <label class="input-group-btn" id="yzmBTNWrapper2">
+                            <button class="btn btn-default" type="button" onclick="page.changeVerificationCode(this)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </button>
+                        </label>
+                        <input type="text" class="form-control" placeholder="验证码" required id="verificationCode2">
+                    </div>
+                </div>
+
+                <button class="btn btn-success form-control form-control1" id="downLoadBTN" type="button" data-clicked="false">下载文件</button>
+            </form>
+        </div>
+    </div>
+</main>
+
+<script>
+    window.page = {
+        data : {
+            isRememberMe : Cookies.get('user')==undefined?false:true,
+            user : {},
+        }
+    }
+</script>
+<script src="js/index.js"></script>
+</body>
+</html>

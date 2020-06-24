@@ -1,0 +1,17 @@
+/*导航栏*/
+nav{
+    box-shadow: 3px 4px 12px 2px #e6e6e6;
+}
+/*导航栏logo*/
+.navbar-brand>img{
+    display: inline-block;
+    height: 100%;
+}
+/*登录表单*/
+.panel-heading>img{
+    height: 100px;
+    width: 100px;
+}
+#yzmBTNWrapper>button{
+    background-image: url(/common/VerificationCodeGenerator);
+}

@@ -1,0 +1,43 @@
+chineseWord:
+  upperBottom: 3495
+  lowerBottom: 1
+
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 50MB # 最大支持文件大小
+      max-request-size: 50MB # 最大支持请求大小
+
+  # 配置文件选择
+  profiles:
+    active: dev
+
+  resources:
+    static-locations: classpath:/static/
+  mvc:
+    view:
+      suffix: .html
+      prefix: /
+  mail:
+    host: smtp.163.com
+#    port: 465
+    username: q1195657409@163.com
+    password: flyingocean1933
+    default-encoding: UTF-8
+#   不用着这些配置也能发送成功
+#    protocol: smtp #发送邮件协议
+#    properties.mail.smtp.auth: true
+#    properties.mail.smtp.port: 465 #端口号465或587
+#    properties.mail.display.sendmail: Xstar #可以任意
+#    properties.mail.display.sendname: FileShip Team #可以任意
+#    properties.mail.smtp.starttls.enable: true
+#    properties.mail.smtp.starttls.required: true
+#    properties.mail.smtp.ssl.enable: true
+    from: q1195657409@163.com #与上面的username保持一致,否则会报错
+
+  #JPA
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL8Dialect
